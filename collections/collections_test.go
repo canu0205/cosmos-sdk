@@ -17,6 +17,12 @@ func deps() (store.KVStoreService, context.Context) {
 	return kv, ctx
 }
 
+func depsT() (store.KVStoreService, context.Context) {
+	ctx := testutil.Context()
+	kv := testutil.KVStoreService(ctx, "test_transient")
+	return kv, ctx
+}
+
 func TestPrefix(t *testing.T) {
 	t.Run("panics on invalid int", func(t *testing.T) {
 		require.Panics(t, func() {
