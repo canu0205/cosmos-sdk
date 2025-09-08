@@ -9,6 +9,7 @@ import (
 
 	store "cosmossdk.io/collections/corecompat"
 	"cosmossdk.io/collections/internal/testutil"
+	corestore "cosmossdk.io/core/store"
 )
 
 func deps() (store.KVStoreService, context.Context) {
@@ -17,9 +18,9 @@ func deps() (store.KVStoreService, context.Context) {
 	return kv, ctx
 }
 
-func depsT() (store.KVStoreService, context.Context) {
+func depsT() (corestore.TransientStoreService, context.Context) {
 	ctx := testutil.Context()
-	kv := testutil.KVStoreService(ctx, "test_transient")
+	kv := testutil.TransientStoreService(ctx, "test_transient")
 	return kv, ctx
 }
 

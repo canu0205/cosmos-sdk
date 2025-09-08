@@ -73,7 +73,7 @@ func TestSchemaBuilderCantBeUsedAfterBuild(t *testing.T) {
 
 func TestSchemaBuilderWithTransientStoreService(t *testing.T) {
 	tsk, _ := depsT()
-	schemaBuilder := NewSchemaBuilderFromAccessor(tsk.OpenKVStore)
+	schemaBuilder := NewSchemaBuilderFromAccessor(tsk.OpenTransientStore)
 	NewMap(schemaBuilder, NewPrefix(1), "abc", Uint64Key, Uint64Value)
 	_, err := schemaBuilder.Build()
 	require.NoError(t, err)
