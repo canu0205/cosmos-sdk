@@ -606,6 +606,10 @@ func TestABCI_CheckTx(t *testing.T) {
 		Height: 1,
 		Hash:   []byte("hash"),
 	})
+	finalizeBlockStore := getFinalizeBlockStateCtx(suite.baseApp).KVStore(capKey1)
+	storedCounterFinalize := getIntFromStore(t, finalizeBlockStore, counterKey)
+	require.NotEqual(t, storedCounter, storedCounterFinalize)
+	t.Logf("storedCounter: %v", storedCounterFinalize)
 	require.NoError(t, err)
 
 	require.NotNil(t, getCheckStateCtx(suite.baseApp).BlockGasMeter(), "block gas meter should have been set to checkState")
